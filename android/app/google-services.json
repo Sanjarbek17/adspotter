@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "380741780358",
+    "project_id": "adpotter-1d5c7",
+    "storage_bucket": "adpotter-1d5c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380741780358:android:c1cdffc24bbefa4c83a207",
+        "android_client_info": {
+          "package_name": "com.example.adspotter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380741780358-ug5mf1un0abunvk4eu07440io164e7aq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu3R3nuJW5qoYiPXq3S08vPcx7qc6buRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380741780358-ug5mf1un0abunvk4eu07440io164e7aq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

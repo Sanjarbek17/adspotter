@@ -50,12 +50,12 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCdRjCVZlhrq72RuEklEyyxYlBRCYhI2Sw',
-    appId: '1:406099696497:android:0d4ed619c031c0ac3574d0',
-    messagingSenderId: '406099696497',
-    projectId: 'flutterfire-e2e-tests',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutterfire-e2e-tests.appspot.com',
+    apiKey: "AIzaSyAu3R3nuJW5qoYiPXq3S08vPcx7qc6buRY",
+    appId: '1:380741780358:android:c1cdffc24bbefa4c83a207',
+    messagingSenderId: '380741780358',
+    projectId: 'adpotter-1d5c7',
+    // databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
+    storageBucket: 'adpotter-1d5c7.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
