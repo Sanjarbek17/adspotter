@@ -80,7 +80,7 @@ class _CameraAppState extends State<CameraApp> {
       UploadTask uploadTask;
 
       // Create a Reference to the file
-      Reference ref = FirebaseStorage.instance.ref().child('user').child('/some-image2.jpg');
+      Reference ref = FirebaseStorage.instance.ref().child('user').child('sanjarbek/some-image2.jpg');
 
       final metadata = SettableMetadata(
         contentType: 'image/jpeg',
@@ -88,12 +88,15 @@ class _CameraAppState extends State<CameraApp> {
       );
 
       if (kIsWeb) {
-        uploadTask = ref.putData(await file.readAsBytes(), metadata);
+        // uploadTask = ref.putData(await file.readAsBytes(), metadata);
+        ListResult r = await FirebaseStorage.instance.ref().child('*').listAll();
+        print(r.items.length);
+        // uploadTask = ref.putData(await file.readAsBytes(), metadata
       } else {
         uploadTask = ref.putFile(File(file.path), metadata);
       }
 
-      return Future.value(uploadTask);
+      // return Future.value(uploadTask);
     }
 
     if (!controller.value.isInitialized) {
