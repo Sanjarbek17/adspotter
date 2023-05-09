@@ -39,6 +39,9 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      // TODO(Lyokone): Remove when FlutterFire CLI updated
+      case TargetPlatform.windows:
+        return android;
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -47,19 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB7wZb2tO1-Fs6GbDADUSTs2Qs3w08Hovw',
-    appId: '1:406099696497:web:87e25e51afe982cd3574d0',
-    messagingSenderId: '406099696497',
-    projectId: 'flutterfire-e2e-tests',
-    authDomain: 'flutterfire-e2e-tests.firebaseapp.com',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    measurementId: 'G-JN95N1JV2E',
+    apiKey: "AIzaSyAHJL1Fim3nafQYlCVN_d0A9qN1WKdx7NE",
+    authDomain: "adpotter-1d5c7.firebaseapp.com",
+    projectId: "adpotter-1d5c7",
+    storageBucket: "adpotter-1d5c7.appspot.com",
+    messagingSenderId: "380741780358",
+    appId: "1:380741780358:web:38b676a07fd12b7083a207",
+    measurementId: "G-SYJP3CM2LX",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCdRjCVZlhrq72RuEklEyyxYlBRCYhI2Sw',
-    appId: '1:406099696497:android:21d5142deea38dda3574d0',
+    appId: '1:406099696497:android:0d4ed619c031c0ac3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
@@ -68,25 +70,25 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDooSUGSf63Ghq02_iIhtnmwMDs4HlWS6c',
-    appId: '1:406099696497:ios:58cbc26aca8e5cf83574d0',
+    appId: '1:406099696497:ios:acd9c8e17b5e620e3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    androidClientId: '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
-    iosClientId: '406099696497-134k3722m01rtrsklhf3b7k8sqa5r7in.apps.googleusercontent.com',
-    iosBundleId: 'io.flutter.plugins.firebase.auth.example',
+    androidClientId: '406099696497-tvtvuiqogct1gs1s6lh114jeps7hpjm5.apps.googleusercontent.com',
+    iosClientId: '406099696497-taeapvle10rf355ljcvq5dt134mkghmp.apps.googleusercontent.com',
+    iosBundleId: 'io.flutter.plugins.firebase.tests',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDooSUGSf63Ghq02_iIhtnmwMDs4HlWS6c',
-    appId: '1:406099696497:ios:58cbc26aca8e5cf83574d0',
+    appId: '1:406099696497:ios:acd9c8e17b5e620e3574d0',
     messagingSenderId: '406099696497',
     projectId: 'flutterfire-e2e-tests',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    androidClientId: '406099696497-17qn06u8a0dc717u8ul7s49ampk13lul.apps.googleusercontent.com',
-    iosClientId: '406099696497-134k3722m01rtrsklhf3b7k8sqa5r7in.apps.googleusercontent.com',
-    iosBundleId: 'io.flutter.plugins.firebase.auth.example',
+    androidClientId: '406099696497-tvtvuiqogct1gs1s6lh114jeps7hpjm5.apps.googleusercontent.com',
+    iosClientId: '406099696497-taeapvle10rf355ljcvq5dt134mkghmp.apps.googleusercontent.com',
+    iosBundleId: 'io.flutter.plugins.firebase.tests',
   );
 }

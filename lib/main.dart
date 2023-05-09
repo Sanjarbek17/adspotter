@@ -5,6 +5,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:cross_file/cross_file.dart';
 
 import 'auth.dart';
 import 'firebase_options.dart';
