@@ -1,7 +1,7 @@
 import 'package:adspotter/screens/login_page/subdir/register_page.dart';
 import 'package:flutter/material.dart';
 
-import './widgets/style.dart';
+import 'subdir/widgets/style.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -11,9 +11,9 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const Drawer(),
       appBar: AppBar(
-        title: Text('AdSptter'),
+        title: const Text('AdSptter'),
       ),
       body: Container(),
     );
