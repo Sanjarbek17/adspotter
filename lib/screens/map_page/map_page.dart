@@ -16,7 +16,12 @@ class _MapPageState extends State<MapPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: DrawerWidget(
+          height: height,
+          width: width,
+        ),
+      ),
       appBar: AppBar(
         title: const Text('AdSptter'),
       ),
