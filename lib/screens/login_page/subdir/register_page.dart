@@ -15,7 +15,7 @@ class RegisterPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(
+          const Spacer(
             flex: 2,
           ),
           Container(
@@ -32,7 +32,8 @@ class RegisterPage extends StatelessWidget {
             child: SizedBox(
               width: 400,
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  hintText: 'Username',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -45,7 +46,8 @@ class RegisterPage extends StatelessWidget {
             child: SizedBox(
               width: 400,
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  hintText: 'Email',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -58,7 +60,8 @@ class RegisterPage extends StatelessWidget {
             child: SizedBox(
               width: 400,
               child: TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
+                  hintText: 'Password',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -72,23 +75,23 @@ class RegisterPage extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => const LoginPage(),
                 ),
               );
             },
-            child: Text('Already have an account'),
+            child: const Text('Already have an account'),
           ),
-          Spacer(),
+          const Spacer(),
           FilledButton(
             onPressed: () {},
             child: Container(
               width: 300,
               height: 45,
               alignment: Alignment.center,
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ),
-          Spacer(
+          const Spacer(
             flex: 3,
           ),
         ],
