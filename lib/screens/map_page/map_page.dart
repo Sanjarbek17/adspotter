@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'subdir/widgets/map/map.dart';
+
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
@@ -15,7 +17,7 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         title: const Text('AdSptter'),
       ),
-      body: Container(),
+      body: const Maps(),
     );
   }
 }
