@@ -4,6 +4,7 @@ import 'screens/login_page/login_page.dart';
 import 'screens/map_page/map_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
