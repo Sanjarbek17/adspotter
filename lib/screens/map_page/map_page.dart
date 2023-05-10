@@ -1,6 +1,8 @@
 import 'package:adspotter/screens/map_page/subdir/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
+import 'subdir/widgets/map/map.dart';
+
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
@@ -14,13 +16,11 @@ class _MapPageState extends State<MapPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      drawer: Drawer(
-        child: DrawerWidget(height: height, width: width),
-      ),
+      drawer: const Drawer(),
       appBar: AppBar(
-        title: Text('AdSptter'),
+        title: const Text('AdSptter'),
       ),
-      body: Container(),
+      body: const Maps(),
     );
   }
 }
