@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+
+import '../widgets/map/widgets/functions.dart';
 
 /// CameraApp is the Main Application.
 class CameraApp extends StatefulWidget {
@@ -58,6 +61,8 @@ class _CameraAppState extends State<CameraApp> {
         onPressed: () async {
           XFile f = await controller.takePicture();
           controller.pausePreview();
+          // get user location
+          Position loc = await determinePosition();
           // this is where image will be saved
         },
         child: const Icon(Icons.camera),
