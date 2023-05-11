@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: unused_local_variable, avoid_print
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';

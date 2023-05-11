@@ -8,6 +8,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -18,7 +19,7 @@ class RegisterPage extends StatelessWidget {
           const Spacer(
             flex: 2,
           ),
-          Container(
+          SizedBox(
             width: 400,
             child: Text(
               'Register',

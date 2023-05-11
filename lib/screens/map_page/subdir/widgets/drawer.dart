@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class DrawerWidget extends StatelessWidget {
   double width;
   double height;
@@ -13,9 +14,9 @@ class DrawerWidget extends StatelessWidget {
           height: height * 0.25,
           color: Colors.blue,
           alignment: Alignment.center,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
+            children: [
               CircleAvatar(
                 radius: 35,
                 child: Icon(
@@ -30,8 +31,8 @@ class DrawerWidget extends StatelessWidget {
         ),
         ListTile(
           onTap: () {},
-          title: Text('Log out'),
-          trailing: Icon(Icons.logout),
+          title: const Text('Log out'),
+          trailing: const Icon(Icons.logout),
         )
       ],
     );
