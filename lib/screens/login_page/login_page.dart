@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
@@ -24,6 +24,8 @@ class _LoginPageState extends State<LoginPage> {
             flex: 2,
           ),
           SizedBox(
+            // heigth
+            height: height,
             width: 400,
             child: Text(
               'Login',

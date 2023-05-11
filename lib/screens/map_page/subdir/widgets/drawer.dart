@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -30,8 +32,8 @@ class DrawerWidget extends StatelessWidget {
         ),
         ListTile(
           onTap: () {},
-          title: Text('Log out'),
-          trailing: Icon(Icons.logout),
+          title: const Text('Log out'),
+          trailing: const Icon(Icons.logout),
         )
       ],
     );

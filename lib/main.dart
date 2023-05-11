@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'screens/login_page/login_page.dart';
 import 'screens/map_page/map_page.dart';
 
 void main() {
