@@ -3,7 +3,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../providers/main_provider.dart';
 import '../widgets/map/widgets/functions.dart';
 
 /// CameraApp is the Main Application.
@@ -51,6 +53,10 @@ class _CameraAppState extends State<CameraApp> {
 
   @override
   Widget build(BuildContext context) {
+    // ImageProvider
+    final image = Provider.of<CustomImageProvider>(context);
+    // AuthProvider
+    final auth = Provider.of<AuthProvider>(context);
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
@@ -64,6 +70,8 @@ class _CameraAppState extends State<CameraApp> {
           // get user location
           Position loc = await determinePosition();
           // this is where image will be saved
+          await image.uploadFile(f, auth.currentUser.displayName, loc);
+          Navigator.pop(context);
         },
         child: const Icon(Icons.camera),
       ),

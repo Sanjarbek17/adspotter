@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../providers/main_provider.dart';
 import '../../pages/camera_page.dart';
 import 'widgets/functions.dart';
 
@@ -41,6 +43,8 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+    // ImageProvider
+    final image = Provider.of<CustomImageProvider>(context);
     return Scaffold(
       body: FlutterMap(
         options: MapOptions(
@@ -107,20 +111,27 @@ class _MapsState extends State<Maps> {
             turnHeadingUpLocationStream: _turnHeadingUpStreamController.stream,
             turnOnHeadingUpdate: _turnOnHeadingUpdate,
           ),
-          MarkerLayer(
-            markers: [
-              // this is where markers placed
-              Marker(
-                point: LatLng(51.509364, -0.128928),
-                width: 80,
-                height: 80,
-                builder: (context) => Image.asset(
-                  'assets/group.png',
-                  fit: BoxFit.fill,
-                ),
-              )
-            ],
-          )
+          FutureBuilder(
+              future: image.getImages(),
+              builder: (context, snapshot) {
+                print('waiting');
+                if (snapshot.connectionState == ConnectionState.done) {
+                  List<Marker> lst = [];
+                  print('done');
+                  for (var i in image.images) {
+                    print('latitude');
+                    print(i.coord.latitude);
+                    lst.add(Marker(
+                        point: i.coord,
+                        builder: (context) => Container(
+                              child: Image.network(i.imageUrl),
+                            )));
+                  }
+                  return MarkerLayer(markers: lst);
+                } else {
+                  return const SizedBox();
+                }
+              })
         ],
       ),
     );

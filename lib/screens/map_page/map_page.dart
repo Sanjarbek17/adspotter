@@ -1,6 +1,5 @@
 import 'package:adspotter/screens/map_page/subdir/widgets/drawer.dart';
 import 'package:flutter/material.dart';
-
 import 'subdir/widgets/map/map.dart';
 
 class MapPage extends StatefulWidget {
