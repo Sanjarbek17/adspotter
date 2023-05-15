@@ -27,9 +27,9 @@ class _CameraAppState extends State<CameraApp> {
     _cameras = await availableCameras();
 
     if (_cameras.length > 1) {
-      controller = CameraController(_cameras[1], ResolutionPreset.max);
+      controller = CameraController(_cameras[1], ResolutionPreset.medium);
     } else {
-      controller = CameraController(_cameras[0], ResolutionPreset.max);
+      controller = CameraController(_cameras[0], ResolutionPreset.medium);
     }
     await controller.initialize().then((_) {
       if (!mounted) {
@@ -92,7 +92,11 @@ class _CameraAppState extends State<CameraApp> {
           builder: (context, snapshot) {
             print(snapshot.hasData);
             if (snapshot.connectionState == ConnectionState.done) {
-              return CameraPreview(controller);
+              return Column(
+                children: [
+                  Expanded(child: CameraPreview(controller)),
+                ],
+              );
             } else {
               return const Center(child: CircularProgressIndicator());
             }
