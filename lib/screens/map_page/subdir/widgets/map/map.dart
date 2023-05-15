@@ -46,8 +46,9 @@ class _MapsState extends State<Maps> {
     return Scaffold(
         body: FlutterMap(
       options: MapOptions(
+        pinchZoomWinGestures: InteractiveFlag.pinchZoom | InteractiveFlag.doubleTapZoom,
         center: LatLng(39.652919301669904, 66.96065624081088),
-        zoom: 9.2,
+        zoom: 13,
         onPositionChanged: (position, hasGesture) {
           setState(() {
             _followOnLocationUpdate = FollowOnLocationUpdate.never;
