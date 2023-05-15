@@ -79,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 return;
               }
               // replace page with map page
+              // ignore: use_build_context_synchronously
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MapPage()));
             },
             child: Container(

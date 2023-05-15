@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../../providers/main_provider.dart';
 import '../../pages/camera_page.dart';
 import 'widgets/functions.dart';
 
 class Maps extends StatefulWidget {
-  const Maps({super.key});
+  const Maps({super.key, required this.lst});
+
+  final List<Marker> lst;
 
   @override
   State<Maps> createState() => _MapsState();
@@ -43,97 +43,74 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
-    // ImageProvider
-    final image = Provider.of<CustomImageProvider>(context);
     return Scaffold(
-      body: FlutterMap(
-        options: MapOptions(
-          center: LatLng(51.509364, -0.128928),
-          zoom: 9.2,
-          onPositionChanged: (position, hasGesture) {
-            setState(() {
-              _followOnLocationUpdate = FollowOnLocationUpdate.never;
-            });
-          },
-        ),
-        nonRotatedChildren: [
-          //camera button
-          Positioned(
-            right: MediaQuery.of(context).size.width * 0.38,
-            bottom: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CameraApp(),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(shape: const CircleBorder()),
-              child: const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Icon(Icons.camera, color: Colors.white, size: 45),
-              ),
-            ),
-          ),
-          //location button
-          Positioned(
-            right: 20,
-            bottom: 30,
-            child: FloatingActionButton(
-              onPressed: () {
-                // Follow the location marker on the map when location updated until user interact with the map.
-                setState(
-                  () => _followOnLocationUpdate = FollowOnLocationUpdate.always,
-                );
-                // Follow the location marker on the map and zoom the map to level 18.
-                _followCurrentLocationStreamController.add(18);
-                _turnHeadingUpStreamController.add(null);
-              },
-              child: const Icon(Icons.my_location),
-            ),
-          )
-        ],
-        children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.app',
-          ),
-          CurrentLocationLayer(
-            style: const LocationMarkerStyle(
-              marker: DefaultLocationMarker(child: Icon(Icons.navigation, color: Colors.white)),
-              markerSize: Size(40, 40),
-              markerDirection: MarkerDirection.heading,
-            ),
-            followCurrentLocationStream: _followCurrentLocationStreamController.stream,
-            followOnLocationUpdate: _followOnLocationUpdate,
-            turnHeadingUpLocationStream: _turnHeadingUpStreamController.stream,
-            turnOnHeadingUpdate: _turnOnHeadingUpdate,
-          ),
-          FutureBuilder(
-              future: image.getImages(),
-              builder: (context, snapshot) {
-                print('waiting');
-                if (snapshot.connectionState == ConnectionState.done) {
-                  List<Marker> lst = [];
-                  print('done');
-                  for (var i in image.images) {
-                    print('latitude');
-                    print(i.coord.latitude);
-                    lst.add(Marker(
-                        point: i.coord,
-                        builder: (context) => Container(
-                              child: Image.network(i.imageUrl),
-                            )));
-                  }
-                  return MarkerLayer(markers: lst);
-                } else {
-                  return const SizedBox();
-                }
-              })
-        ],
+        body: FlutterMap(
+      options: MapOptions(
+        center: LatLng(41.3138944, 69.2420608),
+        zoom: 9.2,
+        onPositionChanged: (position, hasGesture) {
+          setState(() {
+            _followOnLocationUpdate = FollowOnLocationUpdate.never;
+          });
+        },
       ),
-    );
+      nonRotatedChildren: [
+        //camera button
+        Positioned(
+          right: MediaQuery.of(context).size.width * 0.38,
+          bottom: 40,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CameraApp(),
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(shape: const CircleBorder()),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Icon(Icons.camera, color: Colors.white, size: 45),
+            ),
+          ),
+        ),
+        //location button
+        Positioned(
+          right: 20,
+          bottom: 30,
+          child: FloatingActionButton(
+            onPressed: () {
+              // Follow the location marker on the map when location updated until user interact with the map.
+              setState(
+                () => _followOnLocationUpdate = FollowOnLocationUpdate.always,
+              );
+              // Follow the location marker on the map and zoom the map to level 18.
+              _followCurrentLocationStreamController.add(18);
+              _turnHeadingUpStreamController.add(null);
+            },
+            child: const Icon(Icons.my_location),
+          ),
+        )
+      ],
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
+        ),
+        CurrentLocationLayer(
+          style: const LocationMarkerStyle(
+            marker: DefaultLocationMarker(child: Icon(Icons.navigation, color: Colors.white)),
+            markerSize: Size(40, 40),
+            markerDirection: MarkerDirection.heading,
+          ),
+          followCurrentLocationStream: _followCurrentLocationStreamController.stream,
+          followOnLocationUpdate: _followOnLocationUpdate,
+          turnHeadingUpLocationStream: _turnHeadingUpStreamController.stream,
+          turnOnHeadingUpdate: _turnOnHeadingUpdate,
+        ),
+        MarkerLayer(markers: widget.lst),
+      ],
+    ));
   }
 }

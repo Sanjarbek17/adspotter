@@ -19,25 +19,16 @@ class CustomImageProvider extends ChangeNotifier {
 
   // get all image url from firebase storage
   Future<String> getImages() async {
-    List<Image1> images = [];
-    print('getting images');
+    // List<Image1> images = [];
     ListResult user = await FirebaseStorage.instance.ref().child('user').listAll();
-    print(user.items.length);
     for (Reference ref in user.items) {
       String url = await ref.getDownloadURL();
-      print(url);
       String name = ref.name;
-      print(name);
       String author = name.split('+')[0];
-      print('author: $author');
       name = name.split('T')[1].split('.jp')[0];
       List<String> coord = name.split('-');
-      print(coord);
       images.add(Image1(author: author, name: name, imageUrl: url, coord: LatLng(double.parse(coord[0]), double.parse(coord[1]))));
-      print('for loop');
     }
-    print('end images');
-    print(images);
     // notifyListeners();
     return 'done';
   }
@@ -88,24 +79,6 @@ class AuthProvider extends ChangeNotifier {
   // is login
   bool isLogin = false;
 
-  Future<String> initialize() async {
-    FirebaseApp app = await Firebase.initializeApp(
-      name: 'home',
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyAHJL1Fim3nafQYlCVN_d0A9qN1WKdx7NE",
-        authDomain: "adpotter-1d5c7.firebaseapp.com",
-        projectId: "adpotter-1d5c7",
-        storageBucket: "adpotter-1d5c7.appspot.com",
-        messagingSenderId: "380741780358",
-        appId: "1:380741780358:web:38b676a07fd12b7083a207",
-        measurementId: "G-SYJP3CM2LX",
-      ),
-    );
-
-    print('Initialized $app');
-    return 'hi';
-  }
-
   // sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
@@ -115,7 +88,6 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return user;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -127,7 +99,6 @@ class AuthProvider extends ChangeNotifier {
       User? user = result.user;
       return user;
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -138,7 +109,7 @@ class AuthProvider extends ChangeNotifier {
       await _auth.signOut();
       isLogin = false;
     } catch (e) {
-      print(e.toString());
+      // write code that something went wrong
     }
   }
 
