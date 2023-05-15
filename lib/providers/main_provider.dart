@@ -97,9 +97,11 @@ class AuthProvider extends ChangeNotifier {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email.trim(), password: password.trim());
       User? user = result.user;
-      return user;
+      // update username
+      await user!.updateDisplayName(username);
+      return 'done';
     } catch (e) {
-      return null;
+      return e;
     }
   }
 
