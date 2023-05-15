@@ -40,8 +40,13 @@ class _MapPageState extends State<MapPage> {
                   width: 50,
                   height: 50,
                   point: i.coord,
-                  builder: (context) => Image.network(
-                    i.imageUrl,
+                  builder: (context) => Column(
+                    children: [
+                      Image.network(
+                        i.imageUrl,
+                      ),
+                      Text(i.author),
+                    ],
                   ),
                 ),
               );
