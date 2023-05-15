@@ -26,7 +26,11 @@ class _CameraAppState extends State<CameraApp> {
   Future<void> getCamera() async {
     _cameras = await availableCameras();
 
-    controller = CameraController(_cameras[0], ResolutionPreset.max);
+    if (_cameras.length > 1) {
+      controller = CameraController(_cameras[1], ResolutionPreset.max);
+    } else {
+      controller = CameraController(_cameras[0], ResolutionPreset.max);
+    }
     await controller.initialize().then((_) {
       if (!mounted) {
         return;
