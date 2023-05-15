@@ -46,7 +46,7 @@ class _MapsState extends State<Maps> {
     return Scaffold(
         body: FlutterMap(
       options: MapOptions(
-        center: LatLng(41.3138944, 69.2420608),
+        center: LatLng(39.652919301669904, 66.96065624081088),
         zoom: 9.2,
         onPositionChanged: (position, hasGesture) {
           setState(() {
