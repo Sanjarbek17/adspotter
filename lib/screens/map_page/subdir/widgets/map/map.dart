@@ -46,6 +46,7 @@ class _MapsState extends State<Maps> {
     return Scaffold(
         body: FlutterMap(
       options: MapOptions(
+        rotationWinGestures: MultiFingerGesture.none,
         pinchZoomWinGestures: InteractiveFlag.pinchZoom | InteractiveFlag.doubleTapZoom,
         center: LatLng(39.652919301669904, 66.96065624081088),
         zoom: 13,

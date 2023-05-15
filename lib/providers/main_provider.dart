@@ -66,6 +66,7 @@ class CustomImageProvider extends ChangeNotifier {
     } catch (e) {
       throw Exception('File upload failed. Only web platfrom is supported.');
     }
+    notifyListeners();
   }
 }
 
