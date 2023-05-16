@@ -6,7 +6,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../providers/main_provider.dart';
-import '../../map_page.dart';
 import '../widgets/map/widgets/functions.dart';
 
 /// CameraApp is the Main Application.
@@ -78,11 +77,7 @@ class _CameraAppState extends State<CameraApp> {
           // this is where image will be saved
           await image.uploadFile(f, auth.currentUser.displayName, loc);
           // ignore: use_build_context_synchronously
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const MapPage(),
-              ));
+          Navigator.pop(context);
         },
         child: const Icon(Icons.camera),
       ),

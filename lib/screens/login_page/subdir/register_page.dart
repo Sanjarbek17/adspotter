@@ -116,6 +116,7 @@ class RegisterPage extends StatelessWidget {
               // check if register was successful
               if (r != 'done') {
                 // do something
+                // ignore: avoid_print
                 print(r);
                 return;
               }
