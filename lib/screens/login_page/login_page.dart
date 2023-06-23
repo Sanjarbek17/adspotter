@@ -3,7 +3,8 @@ import 'package:adspotter/screens/login_page/subdir/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/main_provider.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/custom_image_provider.dart';
 import '../map_page/map_page.dart';
 import 'subdir/widgets/style.dart';
 
@@ -18,6 +19,23 @@ class _LoginPageState extends State<LoginPage> {
   // email and password text controller
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // check if user is login
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      if (await Provider.of<AuthProvider>(context, listen: false).isLoginFunction()) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MapPage(),
+          ),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          SizedBox(
-            height: height * 0.02,
-          ),
+          SizedBox(height: height * 0.02),
           TextButton(
             onPressed: () {
               Navigator.pushReplacement(
@@ -69,13 +85,17 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () async {
               // check if email and password is empty and check if email is valid
               if (emailController.text.isEmpty || passwordController.text.isEmpty || !emailController.text.contains('@')) {
+                // TODO: show error message
                 // do your stuff
+                print('email or password is empty');
                 return;
               }
               // login user with email and password
               var r = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(emailController.text, passwordController.text);
               if (r == null) {
+                // TODO: show error message
                 // do your stuff
+                print('email or password is wrong');
                 return;
               }
               // replace page with map page
@@ -89,9 +109,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('Login'),
             ),
           ),
-          const Spacer(
-            flex: 3,
-          ),
+          const Spacer(flex: 3),
         ],
       ),
     );

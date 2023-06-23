@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../providers/main_provider.dart';
+import '../../../../providers/auth_provider.dart';
+import '../../../../providers/custom_image_provider.dart';
 import '../widgets/map/widgets/functions.dart';
 
 /// CameraApp is the Main Application.

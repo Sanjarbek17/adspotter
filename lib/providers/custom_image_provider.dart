@@ -35,17 +35,17 @@ class CustomImageProvider extends ChangeNotifier {
 
   // FirebaseStorage methods
   Future<void> uploadFile(XFile? file, String? username, Position p1) async {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyAHJL1Fim3nafQYlCVN_d0A9qN1WKdx7NE",
-        authDomain: "adpotter-1d5c7.firebaseapp.com",
-        projectId: "adpotter-1d5c7",
-        storageBucket: "adpotter-1d5c7.appspot.com",
-        messagingSenderId: "380741780358",
-        appId: "1:380741780358:web:38b676a07fd12b7083a207",
-        measurementId: "G-SYJP3CM2LX",
-      ),
-    );
+    // await Firebase.initializeApp(
+    //   options: const FirebaseOptions(
+    //     apiKey: "AIzaSyAHJL1Fim3nafQYlCVN_d0A9qN1WKdx7NE",
+    //     authDomain: "adpotter-1d5c7.firebaseapp.com",
+    //     projectId: "adpotter-1d5c7",
+    //     storageBucket: "adpotter-1d5c7.appspot.com",
+    //     messagingSenderId: "380741780358",
+    //     appId: "1:380741780358:web:38b676a07fd12b7083a207",
+    //     measurementId: "G-SYJP3CM2LX",
+    //   ),
+    // );
     if (file == null) {
       throw Exception('No file was selected');
     }
@@ -67,57 +67,5 @@ class CustomImageProvider extends ChangeNotifier {
       throw Exception('File upload failed. Only web platfrom is supported.');
     }
     notifyListeners();
-  }
-}
-
-// Auth provider
-class AuthProvider extends ChangeNotifier {
-  // firebase auth instance
-  final FirebaseAuth _auth;
-
-  AuthProvider(this._auth);
-
-  // is login
-  bool isLogin = false;
-
-  // sign in with email and password
-  Future signInWithEmailAndPassword(String email, String password) async {
-    try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(email: email.trim(), password: password.trim());
-      User? user = result.user;
-      isLogin = true;
-      notifyListeners();
-      return user;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  // register with email and password
-  Future registerWithEmailAndPassword(String email, String password, String username) async {
-    try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email.trim(), password: password.trim());
-      User? user = result.user;
-      // update username
-      await user!.updateDisplayName(username);
-      return 'done';
-    } catch (e) {
-      return e;
-    }
-  }
-
-  // sign out
-  Future signOut() async {
-    try {
-      await _auth.signOut();
-      isLogin = false;
-    } catch (e) {
-      // write code that something went wrong
-    }
-  }
-
-  // getter current user
-  User get currentUser {
-    return _auth.currentUser!;
   }
 }

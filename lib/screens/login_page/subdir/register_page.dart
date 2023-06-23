@@ -1,8 +1,9 @@
-import 'package:adspotter/providers/main_provider.dart';
+import 'package:adspotter/providers/custom_image_provider.dart';
 import 'package:adspotter/screens/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/auth_provider.dart';
 import 'widgets/style.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -25,64 +26,42 @@ class RegisterPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Spacer(
-            flex: 2,
-          ),
+          const Spacer(flex: 2),
           SizedBox(
             width: 400,
-            child: Text(
-              'Register',
-              style: mainTextStyle,
-            ),
+            child: Text('Register', style: mainTextStyle),
           ),
-          SizedBox(
-            height: height * 0.15,
-          ),
+          SizedBox(height: height * 0.15),
           Center(
             child: SizedBox(
               width: 400,
               child: TextFormField(
                 controller: usernameController,
-                decoration: const InputDecoration(
-                  hintText: 'Username',
-                  border: OutlineInputBorder(),
-                ),
+                decoration: const InputDecoration(hintText: 'Username', border: OutlineInputBorder()),
               ),
             ),
           ),
-          SizedBox(
-            height: height * 0.04,
-          ),
+          SizedBox(height: height * 0.04),
           Center(
             child: SizedBox(
               width: 400,
               child: TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
+                decoration: const InputDecoration(hintText: 'Email', border: OutlineInputBorder()),
               ),
             ),
           ),
-          SizedBox(
-            height: height * 0.04,
-          ),
+          SizedBox(height: height * 0.04),
           Center(
             child: SizedBox(
               width: 400,
               child: TextFormField(
                 controller: passwordController,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
+                decoration: const InputDecoration(hintText: 'Password', border: OutlineInputBorder()),
               ),
             ),
           ),
-          SizedBox(
-            height: height * 0.02,
-          ),
+          SizedBox(height: height * 0.02),
           TextButton(
             onPressed: () {
               Navigator.pushReplacement(
@@ -123,9 +102,7 @@ class RegisterPage extends StatelessWidget {
               // ignore: use_build_context_synchronously
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginPage(),
-                ),
+                MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
             child: Container(
@@ -135,9 +112,7 @@ class RegisterPage extends StatelessWidget {
               child: const Text('Login'),
             ),
           ),
-          const Spacer(
-            flex: 3,
-          ),
+          const Spacer(flex: 3),
         ],
       ),
     );
