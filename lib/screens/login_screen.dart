@@ -19,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  String? errorEmail;
+  String? errorPassword;
+
   @override
   void initState() {
     super.initState();
@@ -38,80 +41,117 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(flex: 2),
-            SizedBox(width: 400, child: Text('Login', style: mainTextStyle)),
-            SizedBox(height: height * 0.15),
-            Center(
-              child: SizedBox(
-                width: 400,
-                child: TextFormField(
-                  controller: emailController,
-                  decoration: const InputDecoration(hintText: 'Email', border: OutlineInputBorder()),
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.05),
-            Center(
-              child: SizedBox(
-                width: 400,
-                child: TextFormField(
-                  controller: passwordController,
-                  decoration: const InputDecoration(hintText: 'Password', border: OutlineInputBorder()),
-                ),
-              ),
-            ),
-            SizedBox(height: height * 0.02),
-            TextButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RegisterPage(),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 400, child: Text('Login', style: mainTextStyle)),
+                  SizedBox(height: height * 0.15),
+                  SizedBox(
+                    width: 400,
+                    // TITLE: Email input
+                    child: TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        border: const OutlineInputBorder(),
+                        errorText: errorEmail,
+                      ),
+                    ),
                   ),
-                );
-              },
-              child: const Text('Create account'),
-            ),
-            const Spacer(),
-            FilledButton(
-              onPressed: () async {
-                // check if email and password is empty and check if email is valid
-                if (emailController.text.isEmpty || passwordController.text.isEmpty || !emailController.text.contains('@')) {
-                  // TODO: show error message
-                  // do your stuff
-                  print('email or password is empty');
-                  return;
-                }
-                // login user with email and password
-                var r = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(emailController.text, passwordController.text);
-                if (r == null) {
-                  // TODO: show error message
-                  // do your stuff
-                  print('email or password is wrong');
-                  return;
-                }
-                // replace page with map page
-                // ignore: use_build_context_synchronously
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MapPage()));
-              },
-              child: Container(
-                width: 300,
-                height: 45,
-                alignment: Alignment.center,
-                child: const Text('Login'),
+                  SizedBox(height: height * 0.05),
+                  SizedBox(
+                    width: 400,
+                    // TITLE: password input
+                    child: TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        border: const OutlineInputBorder(),
+                        errorText: errorPassword,
+                        // errorStyle: TextStyle
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: height * 0.02),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterPage(),
+                        ),
+                      );
+                    },
+                    child: const Text('Create account'),
+                  ),
+                  FilledButton(
+                    onPressed: () async {
+                      // check if email and password is empty and check if email is valid
+                      if (emailController.text.isEmpty) {
+                        setState(() {
+                          errorEmail = 'email is required';
+                        });
+                        return;
+                      } else {
+                        errorEmail = null;
+                      }
+                      if (!emailController.text.contains('@')) {
+                        setState(() {
+                          errorEmail = 'Provide vaild email';
+                        });
+                        return;
+                      } else {
+                        errorEmail = null;
+                      }
+                      if (passwordController.text.isEmpty) {
+                        setState(() {
+                          errorPassword = 'password is required';
+                        });
+                        return;
+                      } else {
+                        errorEmail = null;
+                      }
+                      if (passwordController.text.length < 6) {
+                        setState(() {
+                          errorPassword = 'password must at least 6 length';
+                        });
+                        return;
+                      } else {
+                        errorEmail = null;
+                      }
+                      // login user with email and password
+                      var r = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(emailController.text, passwordController.text);
+                      if (r == null) {
+                        setState(() {
+                          errorEmail = 'email or password is wrong'; 
+                        });
+                        return;
+                      } else {
+                        errorEmail = null;
+                      }
+                      // replace page with map page
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MapPage()));
+                    },
+                    child: Container(
+                      width: 300,
+                      height: 45,
+                      alignment: Alignment.center,
+                      child: const Text('Login'),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const Spacer(flex: 3),
-          ],
+          ),
         ),
       ),
     );
