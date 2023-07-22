@@ -29,6 +29,13 @@
             {
               "client_id": "380741780358-ug5mf1un0abunvk4eu07440io164e7aq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "380741780358-d3726cek25dkls7gf36atpm8bl5nf2ne.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.adspotter"
+              }
             }
           ]
         }

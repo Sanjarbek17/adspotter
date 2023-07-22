@@ -1,8 +1,10 @@
-import 'package:adspotter/screens/map_page/subdir/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
+
 import '../../providers/custom_image_provider.dart';
+import 'subdir/pages/image_page.dart';
+import 'subdir/widgets/drawer.dart';
 import 'subdir/widgets/map/map.dart';
 
 class MapPage extends StatefulWidget {
@@ -13,11 +15,10 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  late final Future<String> getImages;
+  late final Future<void> getImages;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final image = Provider.of<CustomImageProvider>(context, listen: false);
     getImages = image.getImages();
@@ -32,41 +33,40 @@ class _MapPageState extends State<MapPage> {
     final image = Provider.of<CustomImageProvider>(context);
     return Scaffold(
       drawer: Drawer(
-        child: DrawerWidget(
-          height: height,
-          width: width,
-        ),
+        child: DrawerWidget(height: height, width: width),
       ),
       appBar: AppBar(
-        title: const Text('AdSptter'),
+        title: const Text('AdSpotter'),
       ),
       body: FutureBuilder(
         future: getImages,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            for (var i in image.images) {
-              lst.add(
-                Marker(
-                  width: 50,
-                  height: 50,
-                  point: i.coord,
-                  builder: (context) => Column(
+            return Maps(
+                lst: image.images.map((i) {
+              return Marker(
+                width: 50,
+                height: 100,
+                point: i.coord,
+                builder: (context) => InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ImagePage(image: i)));
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        child: Image.network(
-                          i.imageUrl,
-                          fit: BoxFit.fitWidth,
-                        ),
+                      ClipOval(child: Image.network(i.imageUrl, fit: BoxFit.fitWidth, width: 30, height: 30)),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: 50,
+                        height: 20,
+                        child: Text(i.author, textAlign: TextAlign.center, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 10)),
                       ),
-                      Text(i.author),
                     ],
                   ),
                 ),
               );
-            }
-            return Maps(
-              lst: lst,
-            );
+            }).toList());
           } else {
             return const Center(
               child: CircularProgressIndicator(),

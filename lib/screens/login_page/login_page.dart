@@ -1,11 +1,10 @@
-import 'package:adspotter/screens/login_page/subdir/register_page.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/auth_provider.dart';
-import '../../providers/custom_image_provider.dart';
 import '../map_page/map_page.dart';
+import 'subdir/register_page.dart';
 import 'subdir/widgets/style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,11 +21,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // check if user is login
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (await Provider.of<AuthProvider>(context, listen: false).isLoginFunction()) {
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

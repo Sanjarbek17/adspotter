@@ -1,9 +1,8 @@
-import 'package:adspotter/providers/custom_image_provider.dart';
-import 'package:adspotter/screens/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/auth_provider.dart';
+import '../login_page.dart';
 import 'widgets/style.dart';
 
 class RegisterPage extends StatelessWidget {
