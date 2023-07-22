@@ -48,9 +48,9 @@ class CustomImageProvider extends ChangeNotifier {
     );
 
     try {
-      ref.putData(await file.readAsBytes(), metadata);
+      await ref.putData(await file.readAsBytes(), metadata);
     } catch (e) {
-      throw Exception('File upload failed. Only web platfrom is supported.');
+      throw Exception('File upload failed. Only web platfrom is supported. $e');
     }
     notifyListeners();
   }

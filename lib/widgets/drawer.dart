@@ -1,6 +1,9 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/auth_provider.dart';
 
 class DrawerWidget extends StatelessWidget {
   double width;
@@ -9,33 +12,36 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: height * 0.25,
-          color: Colors.blue,
-          alignment: Alignment.center,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleAvatar(
-                radius: 35,
-                child: Icon(
-                  Icons.person,
-                  size: 30,
+    final auth = Provider.of<AuthProvider>(context);
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            height: height * 0.25,
+            color: Colors.blue,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const CircleAvatar(
+                  radius: 35,
+                  child: Icon(Icons.person, size: 30),
                 ),
-              ),
-              Text('username'),
-              Text('example@gmail.com'),
-            ],
+                Text(auth.currentUser.displayName!, style: const TextStyle(fontSize: 20, color: Colors.white)),
+                Text(auth.currentUser.email!, style: const TextStyle(fontSize: 15, color: Colors.white)),
+              ],
+            ),
           ),
-        ),
-        ListTile(
-          onTap: () {},
-          title: const Text('Log out'),
-          trailing: const Icon(Icons.logout),
-        )
-      ],
+          ListTile(
+            onTap: () {
+              auth.signOut();
+              Navigator.popUntil(context, (route) => false);
+            },
+            title: const Text('Log out'),
+            trailing: const Icon(Icons.logout),
+          )
+        ],
+      ),
     );
   }
 }

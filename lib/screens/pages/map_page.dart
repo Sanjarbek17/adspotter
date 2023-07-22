@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/custom_image_provider.dart';
 import 'camera_page.dart';
 import '../../widgets/functions.dart';
 
@@ -20,7 +22,7 @@ class Maps extends StatefulWidget {
 class _MapsState extends State<Maps> {
   late FollowOnLocationUpdate _followOnLocationUpdate;
   late StreamController<double?> _followCurrentLocationStreamController;
-  late TurnOnHeadingUpdate _turnOnHeadingUpdate;
+  // late TurnOnHeadingUpdate _turnOnHeadingUpdate;
   late StreamController<void> _turnHeadingUpStreamController;
 
   @override
@@ -28,9 +30,9 @@ class _MapsState extends State<Maps> {
     super.initState();
 
     _followOnLocationUpdate = FollowOnLocationUpdate.never;
-    _turnOnHeadingUpdate = TurnOnHeadingUpdate.never;
+    // _turnOnHeadingUpdate = TurnOnHeadingUpdate.never;
     _followCurrentLocationStreamController = StreamController<double?>();
-    _turnHeadingUpStreamController = StreamController<void>();
+    // _turnHeadingUpStreamController = StreamController<void>();
     determinePosition();
   }
 
@@ -43,8 +45,7 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FlutterMap(
+    return FlutterMap(
       options: MapOptions(
         interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.drag,
         center: LatLng(39.652919301669904, 66.96065624081088),
@@ -61,13 +62,15 @@ class _MapsState extends State<Maps> {
           right: MediaQuery.of(context).size.width * 0.38,
           bottom: 40,
           child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacement(
+            onPressed: () async {
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const CameraApp(),
                 ),
               );
+              // ignore: use_build_context_synchronously
+              Provider.of<CustomImageProvider>(context, listen: false).getImages();
             },
             style: ElevatedButton.styleFrom(shape: const CircleBorder()),
             child: const Padding(
@@ -107,11 +110,11 @@ class _MapsState extends State<Maps> {
           ),
           followCurrentLocationStream: _followCurrentLocationStreamController.stream,
           followOnLocationUpdate: _followOnLocationUpdate,
-          turnHeadingUpLocationStream: _turnHeadingUpStreamController.stream,
-          turnOnHeadingUpdate: _turnOnHeadingUpdate,
+          // turnHeadingUpLocationStream: _turnHeadingUpStreamController.stream,
+          // turnOnHeadingUpdate: _turnOnHeadingUpdate,
         ),
         MarkerLayer(markers: widget.lst),
       ],
-    ));
+    );
   }
 }
