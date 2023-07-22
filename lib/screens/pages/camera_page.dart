@@ -18,7 +18,7 @@ class CameraApp extends StatefulWidget {
   State<CameraApp> createState() => _CameraAppState();
 }
 
-class _CameraAppState extends State<CameraApp> {
+class _CameraAppState extends State<CameraApp> with WidgetsBindingObserver {
   late CameraController controller;
 
   late List<CameraDescription> _cameras;
@@ -40,10 +40,10 @@ class _CameraAppState extends State<CameraApp> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            // Handle access errors here.
+            //TODO: Handle access errors here.
             break;
           default:
-            // Handle other errors here.
+            //TODO: Handle other errors here.
             break;
         }
       }
@@ -57,13 +57,26 @@ class _CameraAppState extends State<CameraApp> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final CameraController? cameraController = controller;
+
+    // App state changed before we got the chance to initialize.
+    if (cameraController == null || !cameraController.value.isInitialized) {
+      return;
+    }
+
+    if (state == AppLifecycleState.inactive) {
+      cameraController.dispose();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     // ImageProvider
     final image = Provider.of<CustomImageProvider>(context);
     // AuthProvider
     final auth = Provider.of<AuthProvider>(context);
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Take a picture'),
         centerTitle: true,
@@ -77,6 +90,9 @@ class _CameraAppState extends State<CameraApp> {
           Position loc = await determinePosition();
           // this is where image will be saved
           await image.uploadFile(f, auth.currentUser.displayName, loc);
+          // ignore: use_build_context_synchronously
+          controller.resumePreview();
+          controller.dispose();
           // ignore: use_build_context_synchronously
           Navigator.pop(context);
         },
@@ -97,6 +113,6 @@ class _CameraAppState extends State<CameraApp> {
               return const Center(child: CircularProgressIndicator());
             }
           }),
-    ));
+    );
   }
 }

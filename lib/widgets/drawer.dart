@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
+import '../screens/login_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   double width;
@@ -33,9 +34,12 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {
-              auth.signOut();
-              Navigator.popUntil(context, (route) => route.isFirst);
+            onTap: () async {
+              print('sign out');
+              await auth.signOut();
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+              print('end sign out');
             },
             title: const Text('Log out'),
             trailing: const Icon(Icons.logout),

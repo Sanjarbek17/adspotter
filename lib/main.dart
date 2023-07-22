@@ -1,5 +1,6 @@
 import 'package:adspotter/auth/firebase_options.dart';
 import 'package:adspotter/providers/auth_provider.dart';
+import 'package:adspotter/providers/zoom_provider.dart';
 import 'package:adspotter/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
     providers: [
       ChangeNotifierProvider(create: (context) => CustomImageProvider(auth)),
       ChangeNotifierProvider(create: (context) => AuthProvider(auth)),
+      ChangeNotifierProvider(create: (context) => ZoomProvider()),
     ],
     child: const MyApp(),
   ));
