@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/auth_provider.dart';
-import '../map_page/map_page.dart';
-import 'subdir/register_page.dart';
-import 'subdir/widgets/style.dart';
+import '../providers/auth_provider.dart';
+import 'map_screen.dart';
+import 'pages/register_page.dart';
+import '../widgets/style.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

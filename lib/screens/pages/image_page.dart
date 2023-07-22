@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/model.dart';
+import '../../models/model.dart';
 
 class ImagePage extends StatelessWidget {
   final Image1 image;

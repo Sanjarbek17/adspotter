@@ -1,6 +1,6 @@
 import 'package:adspotter/auth/firebase_options.dart';
 import 'package:adspotter/providers/auth_provider.dart';
-import 'package:adspotter/screens/login_page/login_page.dart';
+import 'package:adspotter/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

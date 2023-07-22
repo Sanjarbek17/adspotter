@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/custom_image_provider.dart';
-import 'subdir/pages/image_page.dart';
-import 'subdir/widgets/drawer.dart';
-import 'subdir/widgets/map/map.dart';
+import '../providers/custom_image_provider.dart';
+import 'pages/image_page.dart';
+import '../widgets/drawer.dart';
+import 'pages/map_page.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});

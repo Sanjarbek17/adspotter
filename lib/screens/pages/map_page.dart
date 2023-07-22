@@ -5,8 +5,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../pages/camera_page.dart';
-import 'widgets/functions.dart';
+import 'camera_page.dart';
+import '../../widgets/functions.dart';
 
 class Maps extends StatefulWidget {
   const Maps({super.key, required this.lst});
